@@ -33,7 +33,11 @@
 
   body {
     margin: 0;
-    background: var(--paper);
+    background:
+      radial-gradient(1100px circle at 12% -12%, rgba(166, 58, 44, 0.06), transparent 55%),
+      radial-gradient(900px circle at 105% 10%, rgba(201, 105, 79, 0.05), transparent 50%),
+      var(--paper);
+    background-attachment: fixed;
     color: var(--ink);
     font-family: 'IBM Plex Sans', -apple-system, sans-serif;
     font-size: 16px;
