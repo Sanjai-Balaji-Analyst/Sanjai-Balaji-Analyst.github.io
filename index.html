@@ -13,14 +13,14 @@
     --ink: #172033;
     --ink-soft: #3A4356;
     --paper: #FAF9F6;
-    --paper-raised: #F3F1EA;
+    --paper-raised: #F1EFE8;
     --accent: #A63A2C;
+    --accent-soft: #C9694F;
     --muted: #6B7280;
     --line: #E1DED4;
   }
 
   * { box-sizing: border-box; }
-
   html { scroll-behavior: smooth; }
 
   body {
@@ -28,7 +28,7 @@
     background: var(--paper);
     color: var(--ink);
     font-family: 'IBM Plex Sans', -apple-system, sans-serif;
-    font-size: 17px;
+    font-size: 16px;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
@@ -36,61 +36,121 @@
   a { color: var(--ink); }
   a:hover { color: var(--accent); }
 
-  .wrap {
-    max-width: 700px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  /* ---- Nav ---- */
-  header.site-nav {
+  /* ---- Top bar ---- */
+  header.topbar {
     position: sticky;
     top: 0;
     background: rgba(250, 249, 246, 0.92);
     backdrop-filter: blur(6px);
     border-bottom: 1px solid var(--line);
-    z-index: 10;
+    z-index: 20;
   }
-  .site-nav .wrap {
-    max-width: 780px;
+  .topbar-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 14px 32px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 14px;
-    padding-bottom: 14px;
   }
-  .site-nav .name {
+  .topbar-inner .brand {
     font-family: 'Newsreader', serif;
     font-weight: 500;
-    font-size: 1.05rem;
+    font-size: 1.02rem;
   }
-  .site-nav nav a {
+  .topbar-inner nav a {
     text-decoration: none;
     color: var(--ink-soft);
-    font-size: 0.92rem;
-    margin-left: 22px;
+    font-size: 0.88rem;
+    margin-left: 24px;
   }
-  .site-nav nav a:hover { color: var(--accent); }
+  .topbar-inner nav a:hover { color: var(--accent); }
 
-  /* ---- Hero ---- */
-  .hero {
-    max-width: 780px;
+  /* ---- Layout ---- */
+  .layout {
+    max-width: 1180px;
     margin: 0 auto;
-    padding: 72px 24px 56px;
+    padding: 44px 32px 80px;
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 56px;
+    align-items: start;
   }
-  .hero .kicker {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.85rem;
-    color: var(--muted);
-    margin-bottom: 18px;
+
+  /* ---- Sidebar ---- */
+  aside.sidebar {
+    position: sticky;
+    top: 78px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
   }
-  .hero h1 {
+  .sidebar h1 {
     font-family: 'Newsreader', serif;
     font-weight: 500;
-    font-size: 2.3rem;
-    line-height: 1.28;
-    margin: 0 0 28px;
-    max-width: 620px;
+    font-size: 1.5rem;
+    margin: 0 0 4px;
+    line-height: 1.25;
+  }
+  .sidebar .role {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin: 0;
+  }
+  .sidebar .bio {
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  .sidebar-block h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+    font-weight: 500;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+  }
+  .sidebar-block ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.88rem;
+  }
+  .sidebar-block li { padding: 2px 0; color: var(--ink-soft); }
+  .sidebar-block.contact a {
+    display: block;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding: 2px 0;
+    font-size: 0.88rem;
+  }
+  .sidebar-block.contact a:hover { border-color: var(--accent); }
+
+  /* ---- Main ---- */
+  main { min-width: 0; }
+
+  .hero {
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .hero-bg {
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 220px; height: 160px;
+    background-image: radial-gradient(var(--line) 1px, transparent 1px);
+    background-size: 14px 14px;
+    opacity: 0.7;
+    z-index: -1;
+  }
+  .hero h2.headline {
+    font-family: 'Newsreader', serif;
+    font-weight: 500;
+    font-size: 1.9rem;
+    line-height: 1.3;
+    margin: 0 0 22px;
+    max-width: 640px;
   }
   .stat-block {
     display: flex;
@@ -98,301 +158,406 @@
     gap: 18px;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
-    padding: 22px 0;
-    margin: 30px 0 30px;
+    padding: 18px 0;
+    margin: 0 0 20px;
     flex-wrap: wrap;
   }
   .stat-block .stat {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 2.1rem;
+    font-size: 1.8rem;
     color: var(--accent);
     font-weight: 500;
     white-space: nowrap;
   }
   .stat-block .stat-label {
-    font-size: 0.98rem;
+    font-size: 0.92rem;
     color: var(--ink-soft);
-    max-width: 420px;
-  }
-  .hero p.lede {
-    font-size: 1.05rem;
-    color: var(--ink-soft);
-    max-width: 620px;
+    max-width: 440px;
   }
 
+  .quickfacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .quickfacts span { white-space: nowrap; }
+  .quickfacts b { color: var(--ink-soft); font-weight: 500; }
+
   /* ---- Section headers ---- */
-  section { padding: 48px 0; border-top: 1px solid var(--line); }
-  section:first-of-type { border-top: none; }
-  h2.section-title {
+  section { padding: 40px 0 8px; border-top: 1px solid var(--line); margin-top: 36px; }
+  h3.section-title {
     font-family: 'Newsreader', serif;
     font-weight: 500;
-    font-size: 1.5rem;
-    margin: 0 0 8px;
+    font-size: 1.3rem;
+    margin: 0 0 6px;
   }
   .section-intro {
     color: var(--muted);
-    font-size: 0.98rem;
-    margin: 0 0 36px;
+    font-size: 0.9rem;
+    margin: 0 0 28px;
     max-width: 560px;
   }
 
-  /* ---- Project entries ---- */
-  .project {
-    padding: 30px 0;
-    border-top: 1px solid var(--line);
+  /* ---- Project grid ---- */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
-  .project:first-child { border-top: none; padding-top: 0; }
-  .project h3 {
+  .project-card {
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 22px 22px 20px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card.wide { grid-column: 1 / -1; }
+  .project-card h4 {
     font-family: 'Newsreader', serif;
     font-weight: 500;
-    font-size: 1.28rem;
+    font-size: 1.12rem;
     margin: 0 0 6px;
+    line-height: 1.3;
   }
-  .project .meta {
+  .project-card .meta {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.82rem;
+    font-size: 0.72rem;
     color: var(--muted);
-    margin-bottom: 14px;
+    margin-bottom: 12px;
+    letter-spacing: 0.01em;
   }
-  .project p { margin: 0 0 14px; color: var(--ink-soft); }
-  .project .finding {
+  .project-card p {
+    margin: 0 0 10px;
+    color: var(--ink-soft);
+    font-size: 0.89rem;
+  }
+  .project-card .finding {
     font-family: 'Newsreader', serif;
     font-style: italic;
-    font-size: 1.05rem;
+    font-size: 0.94rem;
     color: var(--ink);
     border-left: 2px solid var(--accent);
-    padding-left: 16px;
-    margin: 18px 0;
+    padding-left: 12px;
+    margin: 10px 0 14px;
   }
-  .project .links { font-size: 0.92rem; }
-  .project .links a {
+  .chart-wrap {
+    margin: 6px 0 14px;
+  }
+  .chart-caption {
+    font-size: 0.74rem;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .project-card .links {
+    margin-top: auto;
+    font-size: 0.82rem;
+    padding-top: 10px;
+  }
+  .project-card .links a {
     text-decoration: none;
     border-bottom: 1px solid var(--line);
-    margin-right: 20px;
+    margin-right: 16px;
   }
-  .project .links a:hover { border-color: var(--accent); }
+  .project-card .links a:hover { border-color: var(--accent); }
 
   /* ---- Other coursework ---- */
   .coursework-list { list-style: none; padding: 0; margin: 0; }
   .coursework-list li {
-    padding: 14px 0;
+    padding: 13px 0;
     border-top: 1px solid var(--line);
+    font-size: 0.9rem;
   }
   .coursework-list li:first-child { border-top: none; padding-top: 0; }
   .coursework-list strong { font-weight: 600; }
   .coursework-list .cw-meta {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.8rem;
+    font-size: 0.72rem;
     color: var(--muted);
     display: block;
-    margin-top: 3px;
+    margin: 3px 0 6px;
   }
-  .coursework-list a { font-size: 0.88rem; text-decoration: none; border-bottom: 1px solid var(--line); }
+  .coursework-list a { font-size: 0.82rem; text-decoration: none; border-bottom: 1px solid var(--line); }
 
-  /* ---- Skills ---- */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 28px;
-  }
-  .skills-grid h4 {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.78rem;
-    text-transform: none;
-    color: var(--muted);
-    margin: 0 0 10px;
-    font-weight: 500;
-  }
-  .skills-grid ul { list-style: none; margin: 0; padding: 0; }
-  .skills-grid li { padding: 4px 0; color: var(--ink-soft); font-size: 0.95rem; }
-
-  @media (max-width: 640px) {
-    .hero h1 { font-size: 1.8rem; }
-    .skills-grid { grid-template-columns: 1fr; }
-    .site-nav nav a { margin-left: 14px; font-size: 0.85rem; }
-  }
-
-  /* ---- Footer ---- */
   footer {
-    border-top: 1px solid var(--line);
-    padding: 40px 0 60px;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 30px 32px 60px;
     color: var(--muted);
-    font-size: 0.92rem;
+    font-size: 0.84rem;
+    border-top: 1px solid var(--line);
   }
-  footer a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); }
-  footer a:hover { border-color: var(--accent); }
-  footer .contact-links a { margin-right: 20px; }
+
+  @media (max-width: 880px) {
+    .layout { grid-template-columns: 1fr; gap: 40px; padding: 32px 20px 60px; }
+    aside.sidebar { position: static; }
+    .project-grid { grid-template-columns: 1fr; }
+    .hero h2.headline { font-size: 1.55rem; }
+    .topbar-inner { padding: 12px 20px; }
+    .topbar-inner nav a { margin-left: 14px; font-size: 0.82rem; }
+    .hero-bg { display: none; }
+  }
 </style>
 </head>
 <body>
 
-<header class="site-nav">
-  <div class="wrap">
-    <span class="name">Sanjai Balaji</span>
+<header class="topbar">
+  <div class="topbar-inner">
+    <span class="brand">Sanjai Balaji</span>
     <nav>
       <a href="#work">Work</a>
-      <a href="#skills">Skills</a>
+      <a href="#other-work">Coursework</a>
       <a href="#contact">Contact</a>
     </nav>
   </div>
 </header>
 
-<div class="hero">
-  <div class="kicker">MSc Business Analytics — Queen's University Belfast</div>
-  <h1>I'd rather report a model that didn't work than hide one that shouldn't be trusted.</h1>
+<div class="layout">
 
-  <div class="stat-block">
-    <div class="stat">R² = &minus;0.0035</div>
-    <div class="stat-label">What my dissertation's best model achieved, across 16 configurations. The dissertation is the diagnostic protocol that explains why — and proves the dataset, not the modelling, was at fault.</div>
-  </div>
+  <aside class="sidebar">
+    <div>
+      <h1>Sanjai Balaji</h1>
+      <p class="role">MSc Business Analytics<br>Queen's University Belfast</p>
+    </div>
 
-  <p class="lede">I'm finishing an MSc in Business Analytics, working across R, SQL, Python, Tableau, and KNIME on problems that span machine learning, optimisation, and BI. This page collects the projects I'd actually want a hiring manager to look at, with the reasoning intact — not just the results.</p>
+    <p class="bio">I work across R, Python, SQL, Tableau, and KNIME on machine learning, optimisation, and BI problems — and I'd rather report a result that didn't work than dress one up.</p>
+
+    <div class="sidebar-block">
+      <h2>Skills</h2>
+      <ul>
+        <li>R · Python · SQL</li>
+        <li>Tableau · KNIME</li>
+        <li>Regression &amp; classification</li>
+        <li>LASSO, GAM</li>
+        <li>MILP / optimisation</li>
+        <li>Simulation &amp; Markov models</li>
+        <li>CRISP-DM</li>
+      </ul>
+    </div>
+
+   <div class="sidebar-block contact">
+  <h2>Contact</h2>
+  <a href="https://github.com/Sanjai-Balaji-Analyst">GitHub ↗</a>
+  <a href="https://www.linkedin.com/in/sanjai-balaji-4157202b4/">LinkedIn ↗</a>
+  <a href="mailto:sbalaji01@qub.ac.uk">Email</a>
 </div>
+  
+  </aside>
 
-<div class="wrap">
+  <main>
+    <div class="hero">
+      <div class="hero-bg"></div>
+      <h2 class="headline">Six projects. Every one built to survive someone checking my work, not just reading my conclusion.</h2>
 
-  <section id="work">
-    <h2 class="section-title">Featured work</h2>
-    <p class="section-intro">Six projects, each with the full report and — where the underlying code exists as a standalone script rather than embedded in a document — the code itself.</p>
+      <div class="stat-block">
+        <div class="stat">16 / 16</div>
+        <div class="stat-label">model configurations in my dissertation that returned negative R² — and the diagnostic protocol that proves the dataset, not the modelling, was at fault.</div>
+      </div>
 
-    <div class="project">
-      <h3>Predicting Cybersecurity Threat Severity</h3>
-      <div class="meta">MSc DISSERTATION · R · CRISP-DM · HYPOTHESIS TESTING</div>
-      <p>Set out to predict cybersecurity threat severity on a 50,000-record dataset. Four algorithms, four target variables, five-fold cross-validation — sixteen configurations, all with negative R². Rather than assume a modelling mistake, I built a five-stage diagnostic protocol to test the dataset itself: distribution testing, correlation screening, an internal-consistency check (a composite score that turned out not to be a function of its own stated components), and permutation testing.</p>
-      <p class="finding">The dataset was synthetic and internally inconsistent — verifiably, not just suspiciously. The contribution is the validation protocol: runnable in under an hour, before anyone invests weeks modelling a dataset that can't support it.</p>
-      <div class="links">
-        <a href="projects/cybersecurity-threat-severity/report/Dissertation_Research_Report_Final.pdf">Research report</a>
-        <a href="projects/cybersecurity-threat-severity/report/Dissertation_Technical_Report.pdf">Technical report</a>
-        <a href="projects/cybersecurity-threat-severity/code/dissertation_analysis.R">R script</a>
+      <div class="quickfacts">
+        <span><b>MSc</b> Business Analytics, 2026</span>
+        <span><b>Based in</b> Belfast, UK</span>
+        <span><b>Stack</b> R · Python · SQL · Tableau · KNIME</span>
       </div>
     </div>
 
-    <div class="project">
-      <h3>Endoscopy Unit Capacity Planning</h3>
-      <div class="meta">DATA DRIVEN DECISION MAKING · R (ompr / GLPK) · MILP</div>
-      <p>A hospital endoscopy unit splits 10 rooms across 26 weeks between diagnostic and therapeutic procedures, each with different setup costs, operating costs, and capacity. Formulated as a Mixed-Integer Linear Program — 1,300 variables, 780 of them binary — and solved with GLPK to minimise total cost against demand, capacity, and clinician-availability constraints.</p>
-      <p class="finding">The cost-optimal schedule leans hard on the three small rooms and leaves large rooms mostly idle — cheap, but not necessarily the utilisation pattern a hospital manager actually wants. I flagged that trade-off rather than let the optimisation output speak for itself.</p>
-      <div class="links">
-        <a href="projects/endoscopy-capacity-planning/report/endoscopy-capacity-planning-report.pdf">Report</a>
-        <a href="projects/endoscopy-capacity-planning/code/endoscopy_milp.R">R script</a>
-      </div>
-    </div>
+    <section id="work">
+      <h3 class="section-title">Featured work</h3>
+      <p class="section-intro">Full reports and, where the code exists as a standalone script rather than embedded in a document, the code itself.</p>
 
-    <div class="project">
-      <h3>HR Attrition: Tableau + KNIME</h3>
-      <div class="meta">HR ANALYTICS · TABLEAU · KNIME · DECISION TREES</div>
-      <p>A Context → Tension → Resolution Tableau storyboard diagnosing attrition drivers at a pharma company — overtime, work–life balance, compensation — paired with a KNIME decision-tree classifier predicting individual attrition risk.</p>
-      <p class="finding">85% accuracy, but Cohen's Kappa of only ≈0.51 — I reported both, because attrition data is class-imbalanced and the accuracy figure alone overstates how good the model is at catching the people who actually leave.</p>
-      <div class="links">
-        <a href="projects/hr-analytics-attrition/report/hr-attrition-report.pdf">Report</a>
-      </div>
-    </div>
+      <div class="project-grid">
 
-    <div class="project">
-      <h3>Predictive Modelling in R: Networks & Impact</h3>
-      <div class="meta">R · LASSO · GAM · LOGISTIC REGRESSION / LDA · ROC-AUC</div>
-      <p>Two linked studies testing what actually drives outcomes in collaboration and citation networks: regression, LASSO variable selection, GAMs for nonlinear effects, and classification (logistic regression vs. LDA) with full diagnostics.</p>
-      <p class="finding">Career length and network centrality consistently out-predicted the "novelty" and "elite exposure" variables the literature emphasises most — and an elite-exposure × cohesion interaction I expected to matter turned out not to be significant at all.</p>
-      <div class="links">
-        <a href="projects/predictive-modelling-r/collaboration-networks/report/collaboration-networks-report.pdf">Collaboration networks report</a>
-        <a href="projects/predictive-modelling-r/collaboration-networks/code/collaboration_networks_analysis.R">R script</a>
-        <a href="projects/predictive-modelling-r/innovation-impact/report/innovation-impact-report.pdf">Innovation impact report</a>
-      </div>
-    </div>
+        <div class="project-card wide">
+          <h4>Predicting Cybersecurity Threat Severity</h4>
+          <div class="meta">MSC DISSERTATION · R · CRISP-DM · HYPOTHESIS TESTING</div>
+          <p>Four algorithms, four targets, five-fold cross-validation — sixteen configurations, all negative R². Rather than assume a modelling mistake, I built a five-stage diagnostic protocol to interrogate the dataset itself: distribution testing, correlation screening, an internal-consistency check, and permutation testing.</p>
 
-    <div class="project">
-      <h3>Airline Customer Recommendation Prediction</h3>
-      <div class="meta">PYTHON · SCIKIT-LEARN · CRISP-DM · CLASSIFICATION</div>
-      <p>Predicted whether airline passengers would recommend the airline, combining structured service ratings with free-text review analysis. Compared global vs. seat-type-based imputation for missing ratings, and trained Logistic Regression and Random Forest classifiers, validated by training on some airlines and testing on entirely different ones.</p>
-      <p class="finding">Value For Money correlated with recommendation more strongly than any individual service attribute — comfort and staff service mattered less than whether customers felt the price was fair.</p>
-      <div class="links">
-        <a href="projects/airline-recommendation-crispdm/report/airline-recommendation-report.pdf">Report</a>
-      </div>
-    </div>
+          <div class="chart-wrap">
+            <svg viewBox="0 0 460 90" width="100%" height="90" preserveAspectRatio="xMinYMid meet">
+              <line x1="10" y1="34" x2="450" y2="34" stroke="#B7B3A6" stroke-width="1" stroke-dasharray="3,3"/>
+              <text x="454" y="38" font-family="IBM Plex Mono, monospace" font-size="9" fill="#6B7280" text-anchor="end">R² = 0</text>
+              <text x="10" y="16" font-family="IBM Plex Mono, monospace" font-size="9" fill="#6B7280">16 model × target configurations</text>
+              <g fill="#A63A2C" opacity="0.75">
+                <circle cx="28" cy="45" r="4"/><circle cx="52" cy="52" r="4"/><circle cx="76" cy="41" r="4"/><circle cx="100" cy="58" r="4"/>
+                <circle cx="124" cy="47" r="4"/><circle cx="148" cy="63" r="4"/><circle cx="172" cy="44" r="4"/><circle cx="196" cy="55" r="4"/>
+                <circle cx="220" cy="50" r="4"/><circle cx="244" cy="60" r="4"/><circle cx="268" cy="42" r="4"/><circle cx="292" cy="57" r="4"/>
+                <circle cx="316" cy="48" r="4"/><circle cx="340" cy="65" r="4"/><circle cx="364" cy="53" r="4"/><circle cx="388" cy="46" r="4"/>
+              </g>
+            </svg>
+            <div class="chart-caption">Every configuration fell below the zero-skill baseline — schematic, not exact per-model values (see report for the full table).</div>
+          </div>
 
-    <div class="project">
-      <h3>Insurance Data Management: Access + SQL + R</h3>
-      <div class="meta">MICROSOFT ACCESS · SQL · R</div>
-      <p>Designed a relational database for an insurance company's fragmented customer/policy data, built an analytics base table in SQL using left joins (deliberately, to avoid silently dropping customers without every product), then moved into R for data-quality assessment and cleaning.</p>
-      <p class="finding">Chose to filter implausible records (negative ages, zero vehicle values) rather than impute them — imputing a fabricated value into a pricing-relevant field felt like the wrong trade-off, even at the cost of sample size.</p>
-      <div class="links">
-        <a href="projects/insurance-data-management/report/insurance-data-management-report.pdf">Report</a>
-      </div>
-    </div>
-  </section>
+          <p class="finding">The dataset was synthetic and internally inconsistent — a composite "control score" turned out not to be a function of the components it's defined by. The contribution is a validation protocol, runnable in under an hour, before anyone invests weeks modelling a dataset that can't support it.</p>
+          <div class="links">
+            <a href="projects/cybersecurity-threat-severity/report/Dissertation_Research_Report_Final.pdf">Research report</a>
+            <a href="projects/cybersecurity-threat-severity/report/Dissertation_Technical_Report.pdf">Technical report</a>
+            <a href="projects/cybersecurity-threat-severity/code/dissertation_analysis.R">R script</a>
+          </div>
+        </div>
 
-  <section id="other-work">
-    <h2 class="section-title">Other coursework</h2>
-    <p class="section-intro">Smaller pieces, kept here for completeness rather than featured above.</p>
-    <ul class="coursework-list">
-      <li>
-        <strong>Customer Segmentation and Targeting</strong> — cluster analysis + LDA on demographic data across 49 US cities.
-        <span class="cw-meta">MARKETING ANALYTICS · R</span>
-        <a href="projects/other-coursework/report/Marketing_Analytics_Resit_FINAL_v3.pdf">Report</a>
-      </li>
-      <li>
-        <strong>Term Deposit Subscription Prediction</strong> — classification on bank marketing/contact data.
-        <span class="cw-meta">STATISTICS FOR BUSINESS · R</span>
-        <a href="projects/other-coursework/report/STATISTICS_FOR_BUSINESS_ASSIGNMENT_2__1___1_.pdf">Report</a>
-      </li>
-      <li>
-        <strong>Austin House Price Prediction</strong> — regression on property and location features.
-        <span class="cw-meta">STATISTICS FOR BUSINESS · R</span>
-        <a href="projects/other-coursework/report/statistics_R_assignment_1__1___1_.pdf">Report</a>
-      </li>
-      <li>
-        <strong>Ophthalmology Utilization</strong> — group project (5 authors): Markov patient-flow modelling, simulation, and simulated-annealing optimisation for hospital scheduling. The team's existing plan beat the "optimised" one — a result reported honestly rather than reshaped to flatter the method.
-        <span class="cw-meta">DATA DRIVEN DECISION MAKING · R · GROUP PROJECT</span>
-        <a href="projects/other-coursework/report/D3M_group_assignment_part_B.pdf">Report</a>
-      </li>
-    </ul>
-  </section>
+        <div class="project-card">
+          <h4>Predicting Star Performance in Networks</h4>
+          <div class="meta">R · LASSO · LOGISTIC REGRESSION / LDA</div>
+          <p>Tested elite-learning, structural-holes, and technological-breadth theories of high performance in collaboration networks.</p>
 
-  <section id="skills">
-    <h2 class="section-title">Skills</h2>
-    <div class="skills-grid">
-      <div>
-        <h4>Languages</h4>
-        <ul>
-          <li>R</li>
-          <li>SQL</li>
-          <li>Python</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Tools</h4>
-        <ul>
-          <li>Tableau</li>
-          <li>KNIME</li>
-          <li>Microsoft Access</li>
-          <li>RStudio</li>
-        </ul>
-      </div>
-      <div>
-        <h4>Techniques</h4>
-        <ul>
-          <li>Regression & classification</li>
-          <li>LASSO, GAM</li>
-          <li>MILP / optimisation</li>
-          <li>Simulation (Markov, annealing)</li>
-          <li>CRISP-DM</li>
-          <li>Dashboarding</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+          <div class="chart-wrap">
+            <svg viewBox="0 0 220 100" width="100%" height="100" preserveAspectRatio="xMinYMid meet">
+              <line x1="70" y1="6" x2="70" y2="94" stroke="#E1DED4" stroke-width="1"/>
+              <text x="4" y="16" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#3A4356">Career length</text>
+              <rect x="70" y="9" width="90" height="12" fill="#A63A2C"/>
+              <text x="164" y="18" font-family="IBM Plex Mono, monospace" font-size="8" fill="#6B7280">0.39</text>
 
+              <text x="4" y="39" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#3A4356">Elite collaborators</text>
+              <rect x="70" y="32" width="60" height="12" fill="#C9694F"/>
+              <text x="134" y="41" font-family="IBM Plex Mono, monospace" font-size="8" fill="#6B7280">0.26</text>
+
+              <text x="4" y="62" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#3A4356">Effective size</text>
+              <rect x="70" y="55" width="10" height="12" fill="#D9B8AC"/>
+              <text x="84" y="64" font-family="IBM Plex Mono, monospace" font-size="8" fill="#6B7280">0.04</text>
+
+              <text x="4" y="85" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#3A4356">Elite cohesion</text>
+              <rect x="62" y="78" width="8" height="12" fill="#8A93A6"/>
+              <text x="34" y="87" font-family="IBM Plex Mono, monospace" font-size="8" fill="#6B7280">&minus;0.03</text>
+            </svg>
+            <div class="chart-caption">Standardised coefficients — career length and elite exposure dominate; cohesion is slightly negative.</div>
+          </div>
+
+          <p class="finding">Tight, closed elite networks correlated with lower performance, not higher — favouring Burt's structural-holes theory over pure cohesion.</p>
+          <div class="links">
+            <a href="projects/predictive-modelling-r/collaboration-networks/report/collaboration-networks-report.pdf">Report</a>
+            <a href="projects/predictive-modelling-r/collaboration-networks/code/collaboration_networks_analysis.R">R script</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h4>Innovation Impact Predictors</h4>
+          <div class="meta">R · LASSO · GAM</div>
+          <p>Follow-up study: does research impact come from idea novelty, or from network structure and collaboration scale?</p>
+          <p class="finding">Collaboration scale and network centrality out-predicted novelty. The novelty–impact relationship is nonlinear: moderate novelty outperforms extreme novelty.</p>
+          <div class="links">
+            <a href="projects/predictive-modelling-r/innovation-impact/report/innovation-impact-report.pdf">Report</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h4>Endoscopy Unit Capacity Planning</h4>
+          <div class="meta">R (ompr / GLPK) · MILP</div>
+          <p>10 rooms, 26 weeks, minimising setup + operating cost against demand and clinician-availability constraints. 1,300 variables, 780 binary.</p>
+
+          <div class="chart-wrap">
+            <svg viewBox="0 0 220 80" width="100%" height="80" preserveAspectRatio="xMinYMid meet">
+              <line x1="10" y1="70" x2="210" y2="70" stroke="#E1DED4" stroke-width="1"/>
+              <rect x="20" y="10" width="34" height="60" fill="#A63A2C"/>
+              <text x="37" y="8" font-family="IBM Plex Mono, monospace" font-size="8" fill="#6B7280" text-anchor="middle">100%</text>
+              <text x="37" y="80" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#3A4356" text-anchor="middle">Small</text>
+
+              <rect x="93" y="54" width="34" height="16" fill="#C9694F"/>
+              <text x="110" y="52" font-family="IBM Plex Mono, monospace" font-size="8" fill="#6B7280" text-anchor="middle">27%</text>
+              <text x="110" y="80" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#3A4356" text-anchor="middle">Medium</text>
+
+              <rect x="166" y="68" width="34" height="2" fill="#8A93A6"/>
+              <text x="183" y="66" font-family="IBM Plex Mono, monospace" font-size="8" fill="#6B7280" text-anchor="middle">~0%</text>
+              <text x="183" y="80" font-family="IBM Plex Sans, sans-serif" font-size="8" fill="#3A4356" text-anchor="middle">Large</text>
+            </svg>
+            <div class="chart-caption">Relative diagnostic hours scheduled, by room size, in the optimal solution.</div>
+          </div>
+
+          <p class="finding">The cost-optimal schedule leans almost entirely on small rooms, leaving large rooms idle — cheap, but not necessarily the utilisation a hospital manager actually wants.</p>
+          <div class="links">
+            <a href="projects/endoscopy-capacity-planning/report/endoscopy-capacity-planning-report.pdf">Report</a>
+            <a href="projects/endoscopy-capacity-planning/code/endoscopy_milp.R">R script</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h4>HR Attrition: Tableau + KNIME</h4>
+          <div class="meta">TABLEAU · KNIME · DECISION TREES</div>
+          <p>Context → Tension → Resolution storyboard on attrition drivers, paired with a decision-tree classifier for individual risk.</p>
+
+          <div class="chart-wrap">
+            <svg viewBox="0 0 220 70" width="100%" height="70" preserveAspectRatio="xMinYMid meet">
+              <line x1="60" y1="4" x2="60" y2="66" stroke="#E1DED4" stroke-width="1"/>
+              <text x="4" y="15" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#3A4356">Accuracy</text>
+              <rect x="60" y="8" width="136" height="14" fill="#A63A2C"/>
+              <text x="200" y="19" font-family="IBM Plex Mono, monospace" font-size="8" fill="#6B7280">85%</text>
+
+              <text x="4" y="44" font-family="IBM Plex Sans, sans-serif" font-size="9" fill="#3A4356">Cohen's κ</text>
+              <rect x="60" y="37" width="82" height="14" fill="#8A93A6"/>
+              <text x="146" y="48" font-family="IBM Plex Mono, monospace" font-size="8" fill="#6B7280">0.51</text>
+            </svg>
+            <div class="chart-caption">Reported both — accuracy alone overstates performance on imbalanced attrition data.</div>
+          </div>
+
+          <p class="finding">Overtime and compensation misalignment were the strongest predictors of who actually leaves.</p>
+          <div class="links">
+            <a href="projects/hr-analytics-attrition/report/hr-attrition-report.pdf">Report</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h4>Airline Recommendation Prediction</h4>
+          <div class="meta">PYTHON · SCIKIT-LEARN · CRISP-DM</div>
+          <p>Predicted airline recommendation from service ratings and review text; validated by training on some airlines and testing on entirely different ones.</p>
+          <p class="finding">Value For Money correlated with recommendation more strongly than any individual service attribute, including comfort or staff service.</p>
+          <div class="links">
+            <a href="projects/airline-recommendation-crispdm/report/airline-recommendation-report.pdf">Report</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <h4>Insurance Data Management</h4>
+          <div class="meta">MICROSOFT ACCESS · SQL · R</div>
+          <p>Relational database + analytics base table (left joins, deliberately) for fragmented insurance data, then R-based quality assessment and cleaning.</p>
+          <p class="finding">Chose to filter implausible records rather than impute them — imputing a fabricated value into a pricing-relevant field was the wrong trade-off, even at the cost of sample size.</p>
+          <div class="links">
+            <a href="projects/insurance-data-management/report/insurance-data-management-report.pdf">Report</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <section id="other-work">
+      <h3 class="section-title">Other coursework</h3>
+      <p class="section-intro">Smaller pieces, kept for completeness rather than featured above.</p>
+      <ul class="coursework-list">
+        <li>
+          <strong>Customer Segmentation and Targeting</strong>
+          <span class="cw-meta">MARKETING ANALYTICS · R · CLUSTER ANALYSIS + LDA</span>
+          Segmented 49 US cities into commercially meaningful clusters, validated with LDA.
+          <br><a href="projects/other-coursework/report/Marketing_Analytics_Resit_FINAL_v3.pdf">Report</a>
+        </li>
+        <li>
+          <strong>Term Deposit Subscription Prediction</strong>
+          <span class="cw-meta">STATISTICS FOR BUSINESS · R · CLASSIFICATION</span>
+          Predicting bank customer subscription from demographic and campaign features.
+          <br><a href="projects/other-coursework/report/STATISTICS_FOR_BUSINESS_ASSIGNMENT_2__1___1_.pdf">Report</a>
+        </li>
+        <li>
+          <strong>Austin House Price Prediction</strong>
+          <span class="cw-meta">STATISTICS FOR BUSINESS · R · REGRESSION</span>
+          Regression on property and location features.
+          <br><a href="projects/other-coursework/report/statistics_R_assignment_1__1___1_.pdf">Report</a>
+        </li>
+        <li>
+          <strong>Ophthalmology Utilization</strong> <span style="color: var(--muted); font-weight: 400;">— group project, 5 authors</span>
+          <span class="cw-meta">DATA DRIVEN DECISION MAKING · R · MARKOV MODELLING · SIMULATED ANNEALING</span>
+          The team's existing schedule beat the "optimised" one — reported honestly rather than reshaped to flatter the method.
+          <br><a href="projects/other-coursework/report/D3M_group_assignment_part_B.pdf">Report</a>
+        </li>
+      </ul>
+    </section>
+  </main>
 </div>
 
 <footer id="contact">
-  <div class="wrap">
-    <div class="contact-links">
-      <a href="https://github.com/Sanjai-Balaji-Analyst">GitHub</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">Email</a>
-    </div>
-  </div>
+  <a href="https://github.com/Sanjai-Balaji-Analyst">GitHub</a> ·
+  <a href="https://www.linkedin.com/in/sanjai-balaji-4157202b4/">LinkedIn</a> ·
+  <a href="mailto:sbalaji01@qub.ac.uk">Email</a>
 </footer>
-
+  
 </body>
 </html>
